@@ -12,16 +12,37 @@
         <script src="ArskanLib.js"></script>
     </head>
 
-    <body>
-        <div class="container">
-            
+<body>
+    <div class="container">
+        
+       <!-- <iframe style="width:1200px;height:800px;" id="viewer" title="ARSKAN viewer" src="https://viewer.arskan.com/objects/embed/623d8135eb315945a0237d6b?lang=fr" allowfullscreen=""></iframe>
+       -->
+       <iframe style="width:1200px;height:800px;" id="viewer" title="ARSKAN viewer" src="" allowfullscreen=""></iframe>
+        
         <script>
             libArksan = new ArskanLib();
-            libArksan.getAllObjectFromSilo();
+            // id chappelle : 62278c9ecd78795d5ce9b451
+            // Profile id : 5fd0a6c48568fc630e5be379
+            libArksan.getAllObjectFromSilo().then(result => console.log( console.log("getAllObjectFromSillo : ",result) ) );
+            //libArksan.getAllPointersFromObject("62278c9ecd78795d5ce9b451").then(result => console.log("getAllPointersFromObject : ",result) );
+
+            // id d'un pointer de la chapelle : 62278c9ecd78795d5ce9b455
+            //libArksan.getOnePointerFromSilo("62278c9ecd78795d5ce9b455").then(result => console.log("getOnePointerFromSilo : ",result) ) ;
+        
+            //libArksan.getOneObjectFromSilo("62278c9ecd78795d5ce9b451").then(result => console.log("getOneObjectFromSilo : ",result) ) ;
+            //libArksan.getProfilesViewer().then(result => console.log("getProfilesViewer : ",result) ) ;
+            
+            var iframe_element = document.getElementById("viewer")
+            libArksan.getEmbedUrlOfObjectFromSilo("62278c9ecd78795d5ce9b451").then(result => {
+                console.log("getEmbedUrlOfObjectFromSilo : ",result);
+                iframe_element.src = "https://viewer.arskan.com" + result.url +"?lang=fr";
+          });
+        
+        
         </script>
         
-        </div>
+    </div>
 
-    </body>
+</body>
 
 </html>

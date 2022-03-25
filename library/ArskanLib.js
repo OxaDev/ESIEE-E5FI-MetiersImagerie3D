@@ -1,8 +1,9 @@
 class ArskanLib{
 
     constructor(){
-        let _this = this;
-        let apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNlbGluZUBrcmFiYmkuZnIiLCJzaWxvIjoiNjIxNjVmOWFlZjAwZjAyZTEzYzc2ZDdjIiwiaWF0IjoxNjQ2OTA5MzExLCJpc3MiOiJodHRwczovL2FwaS5hcnNrYW4uY29tIn0.ENwjv5bwwtwxOWcGMxJ4CZ-GrhamEfDOMjPmm2Bpdac";
+        this._this = this;
+        this.apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNlbGluZUBrcmFiYmkuZnIiLCJzaWxvIjoiNjIxNjVmOWFlZjAwZjAyZTEzYzc2ZDdjIiwiaWF0IjoxNjQ2OTA5MzExLCJpc3MiOiJodHRwczovL2FwaS5hcnNrYW4uY29tIn0.ENwjv5bwwtwxOWcGMxJ4CZ-GrhamEfDOMjPmm2Bpdac";
+        this.profileToken = "5fd0a6c48568fc630e5be379"
     }
 
     /*
@@ -16,7 +17,7 @@ class ArskanLib{
         var myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
         myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNlbGluZUBrcmFiYmkuZnIiLCJzaWxvIjoiNjIxNjVmOWFlZjAwZjAyZTEzYzc2ZDdjIiwiaWF0IjoxNjQ2OTA5MzExLCJpc3MiOiJodHRwczovL2FwaS5hcnNrYW4uY29tIn0.ENwjv5bwwtwxOWcGMxJ4CZ-GrhamEfDOMjPmm2Bpdac");
+        myHeaders.append("Authorization", "Bearer "+ this.apiToken);
 
         var requestOptions = {
         method: 'GET',
@@ -24,23 +25,42 @@ class ArskanLib{
         redirect: 'follow'
         };
 
-        fetch("https://public-api.arskan.com/objects", requestOptions)
+        return fetch("https://public-api.arskan.com/objects", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        .then(result => {return JSON.parse(result);})
+        .catch(error => {return JSON.parse(error); });
 
-
+        
     }
 
-    getEmbedUrlOfObjectFromSilo(){
+    getEmbedUrlOfObjectFromSilo(objectIDString){
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+this.apiToken);
+        myHeaders.append("Content-Type", "application/json");
 
+        var raw = JSON.stringify({
+        "profile": this.profileToken,
+        "name": "lien"
+        });
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        return fetch("https://public-api.arskan.com/objects/"+objectIDString+"/embed", requestOptions)
+        .then(response => response.text())
+        .then(result => {return JSON.parse(result);})
+        .catch(error => {return JSON.parse(error); });
     }
 
     getOneObjectFromSilo(objectIDString){
         var myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
         myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNlbGluZUBrcmFiYmkuZnIiLCJzaWxvIjoiNjIxNjVmOWFlZjAwZjAyZTEzYzc2ZDdjIiwiaWF0IjoxNjQ2OTA5MzExLCJpc3MiOiJodHRwczovL2FwaS5hcnNrYW4uY29tIn0.ENwjv5bwwtwxOWcGMxJ4CZ-GrhamEfDOMjPmm2Bpdac");
+        myHeaders.append("Authorization", "Bearer "+ this.apiToken);
 
         var requestOptions = {
         method: 'GET',
@@ -48,10 +68,10 @@ class ArskanLib{
         redirect: 'follow'
         };
 
-        fetch("https://public-api.arskan.com/objects/"+idString, requestOptions)
+        return fetch("https://public-api.arskan.com/objects/"+objectIDString, requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        .then(result => {return JSON.parse(result);} )
+        .catch(error => {return JSON.parse(error); });
 
     }
     
@@ -71,7 +91,7 @@ class ArskanLib{
         var myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
         myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNlbGluZUBrcmFiYmkuZnIiLCJzaWxvIjoiNjIxNjVmOWFlZjAwZjAyZTEzYzc2ZDdjIiwiaWF0IjoxNjQ2OTA5MzExLCJpc3MiOiJodHRwczovL2FwaS5hcnNrYW4uY29tIn0.ENwjv5bwwtwxOWcGMxJ4CZ-GrhamEfDOMjPmm2Bpdac");
+        myHeaders.append("Authorization", "Bearer "+ this.apiToken);
 
         var requestOptions = {
         method: 'GET',
@@ -79,16 +99,29 @@ class ArskanLib{
         redirect: 'follow'
         };
 
-        fetch("https://public-api.arskan.com/objects/"+objectIDString+"/pointers", requestOptions)
+        return fetch("https://public-api.arskan.com/objects/"+objectIDString+"/pointers", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        .then(result => {return JSON.parse(result);})
+        .catch(error => {return JSON.parse(error); });
 
 
     }
 
-    getOnePointerFromSilo(){
-
+    getOnePointerFromSilo(pointerIDString){
+        var myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json");
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer "+ this.apiToken);
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        
+        return fetch("https://public-api.arskan.com/pointers/"+pointerIDString, requestOptions)
+        .then(response => response.text())
+        .then(result => {return JSON.parse(result);})
+        .catch(error => {return JSON.parse(error); });
     }
 
     updatePointerFromObject(){
@@ -102,7 +135,7 @@ class ArskanLib{
         var myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
         myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNlbGluZUBrcmFiYmkuZnIiLCJzaWxvIjoiNjIxNjVmOWFlZjAwZjAyZTEzYzc2ZDdjIiwiaWF0IjoxNjQ2OTA5MzExLCJpc3MiOiJodHRwczovL2FwaS5hcnNrYW4uY29tIn0.ENwjv5bwwtwxOWcGMxJ4CZ-GrhamEfDOMjPmm2Bpdac");
+        myHeaders.append("Authorization", "Bearer "+ this.apiToken);
 
         var requestOptions = {
         method: 'GET',
@@ -110,10 +143,33 @@ class ArskanLib{
         redirect: 'follow'
         };
 
-        fetch("https://public-api.arskan.com/silos/current", requestOptions)
+        return fetch("https://public-api.arskan.com/silos/current", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        .then(result => {return JSON.parse(result);})
+        .catch(error => {return JSON.parse(error); });
+
+    }
+
+    /*
+        Profiles
+    */
+
+    getProfilesViewer(){
+        var myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json");
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer "+ this.apiToken);
+
+        var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+        };
+
+        return fetch("https://public-api.arskan.com/profiles")
+        .then(response => response.text())
+        .then(result => {return JSON.parse(result);})
+        .catch(error => {return JSON.parse(error); });
 
     }
 
