@@ -9,9 +9,6 @@ class ArskanLib{
     /*
         Objects
     */
-    addObjectToSilo(){
-        
-    }
 
     getAllObjectFromSilo(){
         var myHeaders = new Headers();
@@ -79,13 +76,63 @@ class ArskanLib{
         Pointers
     */
 
-    addPointerToObject(){
+    addPointerToObject(objectIDString, pointerDataJSON){
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+ this._this.apiToken);
+        myHeaders.append("Content-Type", "application/json");
 
+        /*var raw = JSON.stringify(
+        {
+            "title": "Pointeur test",
+            "description": "Un test de pointeur",
+            "camera": {
+                "position": [
+                -4.077664170818505,
+                -4.847131772241993,
+                5.502754761565836],
+                "target": [
+                4.34378771530249,
+                -5.631050889679713,
+                2.456711622775799]
+            },
+            "position": {
+                "x": 4.34378771530249,
+                "y": -5.631050889679713,
+                "z": 2.456711622775799
+            }
+        }
+        );*/
+
+        var raw = JSON.stringify(pointerDataJSON);
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        fetch("https://public-api.arskan.com/objects/"+objectIDString+"/pointers", requestOptions)
+        .then(response => response.text())
+        .then(result => {return JSON.parse(result);})
+        .catch(error => {return JSON.parse(error); });
     }
 
-    deletePointerFromObject(){
+    deletePointerFromObject(pointerIDString){
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+this.apiToken);
 
-    }
+        var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        redirect: 'follow'
+        };
+
+        fetch("https://public-api.arskan.com/pointers/"+pointerIDString, requestOptions)
+        .then(response => response.text())
+        .then(result => {return JSON.parse(result);})
+        .catch(error => {return JSON.parse(error); });
+            }
 
     getAllPointersFromObject(objectIDString){
         var myHeaders = new Headers();
@@ -124,8 +171,46 @@ class ArskanLib{
         .catch(error => {return JSON.parse(error); });
     }
 
-    updatePointerFromObject(){
+    updatePointerFromObject(pointerIDString, pointerDataJSON){
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+this.apiToken);
+        myHeaders.append("Content-Type", "application/json");
 
+        /*var raw = JSON.stringify({
+        "title": "Pointeur test changed",
+        "description": "Un test de pointeur",
+        "camera": {
+            "position": [
+            -4.077664170818505,
+            -4.847131772241993,
+            5.502754761565836
+            ],
+            "target": [
+            4.34378771530249,
+            -5.631050889679713,
+            2.456711622775799
+            ]
+        },
+        "position": {
+            "x": 4.34378771530249,
+            "y": -5.631050889679713,
+            "z": 2.456711622775799
+        }
+        });*/
+
+        var raw = JSON.stringify(pointerDataJSON);
+
+        var requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        fetch("https://public-api.arskan.com/pointers/"+pointerIDString, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
     }
 
     /*
