@@ -103,8 +103,9 @@ class ArskanLib {
         }
         );*/
 
+        console.log("0000000" , pointerDataJSON);
         var raw = JSON.stringify(pointerDataJSON);
-
+        
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
