@@ -5,16 +5,30 @@
         <title>Call Arskan</title>
         <meta charset='utf-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    -->
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	 			   			      -->
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+
+       			   			     
         <script src="ArskanLib.js"></script>
+        <script src="../ArskanFront.js"></script>
     </head>
 
 <body>
+
+
+
     <div class="container">
-        
+
+                 
+
+
+
        <!-- <iframe style="width:1200px;height:800px;" id="viewer" title="ARSKAN viewer" src="https://viewer.arskan.com/objects/embed/623d8135eb315945a0237d6b?lang=fr" allowfullscreen=""></iframe>
        -->
        <iframe style="width:1200px;height:800px;" id="viewer" title="ARSKAN viewer" src="" allowfullscreen=""></iframe>
@@ -36,12 +50,171 @@
             libArksan.getEmbedUrlOfObjectFromSilo("62278c9ecd78795d5ce9b451").then(result => {
                 console.log("getEmbedUrlOfObjectFromSilo : ",result);
                 iframe_element.src = "https://viewer.arskan.com" + result.url +"?lang=fr";
-          });
-        
+            });
+
+            
+
         
         </script>
+
+
+
         
     </div>
+
+    <div class="row">
+
+        <select id="dropdownObjects">
+          
+        </select>
+    </div>
+
+    <div class="row">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Nouvelle étiquette
+        </button>
+
+    </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Liste des étiquettes</h5>
+
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="titleModal" class="form-label"> title </label>
+              <input class="form-control-sm" type="text" id="titleModal">
+            </div>  
+            
+            <div class="mb-3">
+              <label for="descModal" class="form-label"> description </label>
+              <input class="form-control-sm" type="text" id="descModal">
+            </div>
+
+            <div class="mb-3">
+              <label for="cameraPosXModal" class="form-label"> camera position X </label>
+              <input class="form-control-sm" type="text" id="cameraPosXModal">
+            </div>
+            
+            <div class="mb-3">
+              <label for="cameraPosYModal" class="form-label"> camera position Y </label>
+              <input class="form-control-sm" type="text" id="cameraPosYModal">
+            </div>
+            <div class="mb-3">
+              <label for="cameraPosZModal" class="form-label"> camera position Z </label>
+              <input class="form-control-sm" type="text" id="cameraPosZModal">
+            </div>
+            <div class="mb-3">
+              <label for="cameraTargetXModal" class="form-label"> camera target X </label>
+              <input class="form-control-sm" type="text" id="cameraTargetXModal">
+            </div>
+            <div class="mb-3">
+              <label for="cameraTargetYModal" class="form-label"> camera target Y </label>
+              <input class="form-control-sm" type="text" id="cameraTargetYModal">
+            </div>
+            <div class="mb-3">
+              <label for="cameraTargetZModal" class="form-label"> camera target Z </label>
+              <input class="form-control-sm" type="text" id="cameraTargetZModal">
+            </div>
+
+            <div class="mb-3">
+              <label for="posXModal" class="form-label"> position X </label>
+              <input class="form-control-sm" type="text" id="posXModal">
+            </div>
+
+            <div class="mb-3">
+              <label for="posYModal" class="form-label"> position Y </label>
+              <input class="form-control-sm" type="text" id="posYModal">
+            </div>
+            <div class="mb-3">
+              <label for="posZModal" class="form-label"> position Z </label>
+              <input class="form-control-sm" type="text" id="posZModal">
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="addPointer()">Save changes</button>
+          </div>
+    </div>
+  </div>
+</div>
+
+    <script>
+        var dropdownObjects=document.getElementById("dropdownObjects");
+
+        libArksan.getAllObjectFromSilo().then(function(result){
+
+            for(var i=0;i<Object.keys(result).length;++i){
+                var newOption=document.createElement("option");
+                newOption.value=result[i].id;
+                newOption.text=result[i].name;
+
+                dropdownObjects.add(newOption);
+            }
+        }  );
+
+        function addPointer(){
+
+            var libArksan = new ArskanLib();
+
+            var title=document.getElementById("titleModal");
+            var desc=document.getElementById("descModal");
+            var cameraPosX=document.getElementById("cameraPosXModal");
+            var cameraPosY=document.getElementById("cameraPosYModal");
+            var cameraPosZ=document.getElementById("cameraPosZModal");
+            var cameraTargetX=document.getElementById("cameraTargetXModal");
+            var cameraTargetY=document.getElementById("cameraTargetYModal");
+            var cameraTargetZ=document.getElementById("cameraTargetZModal");
+            var posX=document.getElementById("posXModal");
+            var posY=document.getElementById("posYModal");
+            var posZ=document.getElementById("posZModal");
+
+
+            var dropdownObjects=document.getElementById("dropdownObjects");
+            //var objectIDString=dropdownObjects.options[dropdownObjects.selectedIndex].value;
+            var objectIDString="62278c9ecd78795d5ce9b451";
+            var pointerDataJSON=    {
+                "title": title.value,
+                "description": desc.value,
+                "camera": {
+                    "position": [
+                        parseFloat(cameraPosX.value),
+                        parseFloat(cameraPosY.value),
+                        parseFloat(cameraPosZ.value)
+                    ],
+                    "target": [
+                        parseFloat(cameraTargetX),
+                        parseFloat(cameraTargetY),
+                        parseFloat(cameraTargetZ)
+                    ]
+                },
+                "position": {
+                    "x": parseFloat(posX.value),
+                    "y": parseFloat(posY.value),
+                    "z": parseFloat(posZ.value)
+                }
+            }
+
+            libArksan.addPointerToObject(objectIDString, pointerDataJSON);
+        }
+
+
+
+            
+    </script>
+
+
 
 </body>
 
