@@ -3,12 +3,51 @@ class ArskanLib {
     constructor() {
         this._this = this;
         this.apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNlbGluZUBrcmFiYmkuZnIiLCJzaWxvIjoiNjIxNjVmOWFlZjAwZjAyZTEzYzc2ZDdjIiwiaWF0IjoxNjQ2OTA5MzExLCJpc3MiOiJodHRwczovL2FwaS5hcnNrYW4uY29tIn0.ENwjv5bwwtwxOWcGMxJ4CZ-GrhamEfDOMjPmm2Bpdac";
-        this.profileToken = "5fd0a6c48568fc630e5be379"
+        this.profileToken = "5fd0a6c48568fc630e5be379";
     }
+	
+	/* Other form of constructors
+	constructor(apiTokenString) {
+        this._this = this;
+        this.apiToken = apiTokenString;
+		this.profileToken = "5fd0a6c48568fc630e5be379";
+    }
+	
+	constructor(apiTokenString, profileTokenString) {
+        this._this = this;
+        this.apiToken = apiTokenString;
+		this.profileToken = profileTokenString;
+    }
+	*/
 
+	
     /*
         Objects
     */
+
+	updateObjectFromSilo(objectIDString, objectDataJSON){
+
+		var myHeaders = new Headers();
+		myHeaders.append("Authorization", "Bearer " + this.apiToken);
+		myHeaders.append("Content-Type", "application/json");
+
+		/*var raw = JSON.stringify({
+		  "name": "Chapelle de Cluny modified",
+		  "description": "UN test de description"
+		});*/
+
+		var requestOptions = {
+		  method: 'PUT',
+		  headers: myHeaders,
+		  body: JSON.stringify(objectDataJSON),
+		  redirect: 'follow'
+		};
+
+		return fetch("https://public-api.arskan.com/objects/"+objectIDString, requestOptions)
+		  .then(response => response.text())
+		  .then(result => console.log(result))
+		  .catch(error => console.log('error', error));
+	}
 
     getAllObjectFromSilo() {
         var myHeaders = new Headers();
@@ -258,5 +297,7 @@ class ArskanLib {
             .catch(error => { return JSON.parse(error); });
 
     }
+
+
 
 }
