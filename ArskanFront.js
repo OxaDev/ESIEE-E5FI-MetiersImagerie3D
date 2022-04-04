@@ -89,9 +89,9 @@ function saveEditPointer() {
                 parseFloat(cameraPosZ.value)
             ],
             "target": [
-                parseFloat(cameraTargetX),
-                parseFloat(cameraTargetY),
-                parseFloat(cameraTargetZ)
+                parseFloat(cameraTargetX.value),
+                parseFloat(cameraTargetY.value),
+                parseFloat(cameraTargetZ.value)
             ]
         },
         "position": {
