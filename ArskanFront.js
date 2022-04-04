@@ -15,7 +15,7 @@ function initPage() {
         dropdownObjects.selectedIndex = 6;
 
         loadNewModel();
-        loadPointer();
+
     });
 
 }
@@ -28,6 +28,7 @@ function loadNewModel() {
     var libArksan = new ArskanLib();
     libArksan.getEmbedUrlOfObjectFromSilo(objectIDString).then(function (result) {
         iframe_element.src = "https://viewer.arskan.com" + result.url + "?lang=fr";
+        loadPointer();
     });
 }
 
@@ -36,7 +37,6 @@ function deletePointer(id) {
     var idSPlit = id.split("_");
     var goodId = idSPlit[1];
     libArksan.deletePointerFromObject(goodId).then(function (result) {
-        loadPointer();
         loadNewModel();
     });
 }
@@ -105,7 +105,6 @@ function saveEditPointer() {
     libArksan = new ArskanLib();
     libArksan.updatePointerFromObject(id, pointerDataJSON).then(function (result) {
         loadNewModel();
-        loadPointer();
     });
 
     $('#editPointerModal').modal('hide');
@@ -142,6 +141,7 @@ function generateLine(i, id, title) {
 
 
     var newTD2 = document.createElement("td");
+    newTD2.classList.add("text-center");
     newTR.appendChild(newTD2);
 
     var aEdit = document.createElement("a");
@@ -152,10 +152,11 @@ function generateLine(i, id, title) {
     var bEdit = document.createElement("button");
     bEdit.classList.add("btn");
     bEdit.classList.add("btn-warning");
+    bEdit.classList.add("mr-3");
     bEdit.setAttribute("data-toggle", "modal");
     bEdit.setAttribute("data-target", "#editPointerModal");
-    bEdit.setAttribute("id", "buttonUpdate_" + id),
-        bEdit.setAttribute("onclick", "editPointer(this.id)");
+    bEdit.setAttribute("id", "buttonUpdate_" + id);
+    bEdit.setAttribute("onclick", "editPointer(this.id)");
 
     var iEdit = document.createElement("i");
     iEdit.classList.add("fa");
@@ -226,7 +227,6 @@ function addPointer() {
     }
 
     libArksan.addPointerToObject(objectIDString, pointerDataJSON).then(function (result) {
-        loadPointer();
         loadNewModel();
     });
 
